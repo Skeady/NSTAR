@@ -1,5 +1,10 @@
 1.1.1.1:
     interfaces:
+        Ethernet0/0:
+            state:
+                down
+            ip_address:
+                192.168.1.1/24
         GigabitEthernet0/0:
             state:
                 up
@@ -15,7 +20,7 @@
                 up
             ip_address:
                 no ip address
-        lo1:
+        Loopback1:
             state:
                 up
             ip_address:
@@ -49,69 +54,3 @@
                     tcp
                 ports:
                     [80, 443]
-2.2.2.2:
-    interfaces:
-        GigabitEthernet0/0:
-            state:
-                up
-            ip_address:
-                10.1.1.2/24
-        GigabitEthernet1/0:
-            state:
-                up
-            ip_address:
-                10.2.2.2/24
-        GigabitEthernet2/0:
-            state:
-                up
-            ip_address:
-                192.168.178.192/24
-        lo1:
-            state:
-                up
-            ip_address:
-                2.2.2.2/24
-3.3.3.3:
-    interfaces:
-        GigabitEthernet0/0:
-            state:
-                up
-            ip_address:
-                172.16.3.1/24
-        GigabitEthernet1/0:
-            state:
-                up
-            ip_address:
-                10.2.2.1/24
-        GigabitEthernet2/0:
-            state:
-                down
-            ip_address:
-                None
-        lo1:
-            state:
-                up
-            ip_address:
-                3.3.3.3/24
-4.4.4.4:
-    interfaces:
-        GigabitEthernet0/0:
-            state:
-                up
-            ip_address:
-                192.168.1.1/24
-        GigabitEthernet1/0:
-            state:
-                up
-            ip_address:
-                209.165.200.226/29
-        GigabitEthernet2/0:
-            state:
-                down
-            ip_address:
-                192.168.2.1/24
-        lo1:
-            state:
-                up
-            ip_address:
-                4.4.4.4/24

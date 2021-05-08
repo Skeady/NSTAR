@@ -1,0 +1,17 @@
+2021-05-08 11:43:23,589 [INFO] [MainThread] [root] Starting audit
+2021-05-08 11:43:23,589 [INFO] [MainThread] [root] Running Audit on 1.1.1.1
+2021-05-08 11:43:23,635 [INFO] [Thread-1] [paramiko.transport] Connected (version 2.0, client Cisco-1.25)
+2021-05-08 11:43:24,584 [INFO] [Thread-1] [paramiko.transport] Authentication (password) successful!
+2021-05-08 11:43:25,191 [INFO] [MainThread] [root] Current Interface State:             
+{'1.1.1.1': {'Ethernet0/0': {'state': 'down'}, 'GigabitEthernet0/0': {'state': 'up'}, 'GigabitEthernet1/0': {'state': 'up'}, 'GigabitEthernet2/0': {'state': 'down'}, 'Loopback1': {'state': 'up'}}}
+2021-05-08 11:43:25,191 [WARNING] [MainThread] [root] 1.1.1.1 interface GigabitEthernet2/0 is not as expected executing remediation
+2021-05-08 11:43:25,191 [INFO] [MainThread] [root] Getting interface info from directive for 1.1.1.1
+2021-05-08 11:43:25,191 [INFO] [MainThread] [root] Setting interface state                 Running ['int GigabitEthernet2/0', 'no shut'] on 1.1.1.1
+2021-05-08 11:43:25,704 [INFO] [MainThread] [root] Remediation Response:                     
+int GigabitEthernet2/0 - R1(config-if)#no shut - R1(config-if)#end - R1#
+2021-05-08 11:43:25,704 [INFO] [MainThread] [root] Getting access-list info device for 1.1.1.1
+2021-05-08 11:43:25,905 [WARNING] [MainThread] [root] No access-list information found for 1.1.1.1 executing remediation
+2021-05-08 11:43:25,905 [INFO] [MainThread] [root] Getting access-list info from directive for 1.1.1.1
+2021-05-08 11:43:25,987 [INFO] [MainThread] [root] Setting access-list info                 Running ['access-list 150 deny tcp                     172.16.3.1 0.0.0.0                     209.165.200.225 0.0.0.0 eq www', 'access-list 150 deny tcp                     172.16.3.1 0.0.0.0                     209.165.200.225 0.0.0.0 eq 443'] on 1.1.1.1
+2021-05-08 11:43:26,394 [INFO] [MainThread] [root] Remediation Response:                 
+access-list 150 deny tcp                     172.16.3.1 0.0.0.0                     209.165.200.225 0.0.0.0 eq www - R1(config)#access-list 150 deny tcp                     172.16.3.1 0.0.0.0                     209.165.200.225 0.0.0.0 eq 443 - R1(config)#end - R1#

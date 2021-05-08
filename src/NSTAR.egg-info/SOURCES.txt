@@ -1,0 +1,7 @@
+README.md
+setup.py
+src/NSTAR.egg-info/PKG-INFO
+src/NSTAR.egg-info/SOURCES.txt
+src/NSTAR.egg-info/dependency_links.txt
+src/NSTAR.egg-info/entry_points.txt
+src/NSTAR.egg-info/top_level.txt

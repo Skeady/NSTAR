@@ -1,4 +1,8 @@
-show_acl_list = ['show access-lists']
+"""
+    Commands:
+        - General commands to run on the devices
+"""
+show_acl_list = ['end', 'show access-lists']
 interface = {
     'up': 'no shut',
     'down': 'shut',

@@ -1,6 +1,7 @@
 from . import(
-    ro_snmp,
-    remediate,
     commands,
+    directive,
+    nstar_monitor,
+    remediate,
     utils
 )
