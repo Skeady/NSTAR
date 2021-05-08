@@ -6,7 +6,7 @@ _yaml = config('_FILE_PATH')
 with open(_yaml) as yaml_file:
     directive = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
-class NstarDirective(object):
+class SecuritPolicies(object):
     """
         Class:
             - Used as a means of retrieving the security policies

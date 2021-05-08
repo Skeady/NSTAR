@@ -1,5 +1,5 @@
 from pysnmp.hlapi import *
-from directive import NstarDirective
+from directive import SecuritPolicies
 from remediate import *
 import commands
 import time
@@ -9,12 +9,12 @@ class MonitorDevice(object):
     """
         Class: 
             - Gets device current network network confiugrations 
-            - Compares them to the security policies in the NstarDirective
+            - Compares them to the security policies in the SecurityPolicies()
             - Executes remediation if the devices current configs are none compliant with the security policy
     """
     def __init__(self, device):
         self.device = RemediateDevice(device)
-        self.directive = NstarDirective().directive_details
+        self.directive = SecuritPolicies().directive_details
     
     # Uses SNMP to get device interface status
     def get_interface_current_state(self):
@@ -127,7 +127,7 @@ class MonitorDevice(object):
 
 # Used to execute MonitorDevice class for each host
 def monitor_devices():
-    directive = NstarDirective().directive_details
+    directive = SecurityPolicies().directive_details
     host_list = list(directive.keys())
     for host in host_list:
         logging.info(

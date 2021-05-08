@@ -2,7 +2,7 @@ import yaml
 import commands
 from utils import cidr_to_subnet
 from netmiko import ConnectHandler
-from directive import NstarDirective
+from directive import SecurityPolicies
 import logging
 from decouple import config
 
@@ -20,7 +20,7 @@ class RemediateDevice(object):
         target,
     ):
         self.target = target
-        self.directive_details = NstarDirective().directive_details
+        self.directive_details = SecurityPolicies().directive_details
         self.target_connection = ConnectHandler(
             device_type= 'cisco_ios',
             host= self.target,
