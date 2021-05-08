@@ -25,10 +25,10 @@ class SecuritPolicies(object):
     def get_interfaces(self, device):
         return [_int for _int, data in directive[device].items()]
     
-    # Used to get the expected state of a device port from the security policy
-    def get_interface_status(self, device, interface):
+    # Used to get the directed state of a device port from the security policy
+    def get_interface_directed_state(self, device, interface):
         return directive[device][interface]['state']
 
-    # Used to get the expected prefix of a device port from the security policy
-    def get_interface_prefix(self, device, interface):
+    # Used to get the directed prefix of a device port from the security policy
+    def get_interface_directed_prefix(self, device, interface):
         return directive[device][interface]['prefix']

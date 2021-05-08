@@ -20,7 +20,7 @@ class RemediateDevice(object):
         target,
     ):
         self.target = target
-        self.directive_details = SecurityPolicies().directive_details
+        self.policies = SecurityPolicies()
         self.target_connection = ConnectHandler(
             device_type= 'cisco_ios',
             host= self.target,
@@ -30,7 +30,7 @@ class RemediateDevice(object):
 
     # Used to set the interface state on the device to whats specified in the security policy
     def set_interface_state(self, interface_name):
-        expected_state = self.get_interface_details(self.target, interface_name)['state']
+        expected_state = self.policies.get_interface_directed_state(interface_name)
         execute_command = commands.interface[expected_state]
         execute_command = [
             f'int {interface_name}',
@@ -74,14 +74,14 @@ class RemediateDevice(object):
         logging.info(
             f"Getting access-list info from directive for {self.target}"
         )
-        return self.directive_details[self.target]['acls'][acl_state]
+        return self.policies.directive_details[self.target]['acls'][acl_state]
 
     # Used to get the interface details from the security policy
     def get_interface_details(self, target, interface_name):
         logging.info(
             f"Getting interface info from directive for {self.target}"
         )
-        return self.directive_details[self.target]['interfaces'][interface_name]
+        return self.policies.directive_details[self.target]['interfaces'][interface_name]
 
     # Used to get the current configured access-list info from the device
     def get_current_acl_details(self):
