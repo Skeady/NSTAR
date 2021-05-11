@@ -127,7 +127,7 @@ class MonitorDevice(object):
 
 # Used to execute MonitorDevice class for each host
 def monitor_devices():
-    directive = SecurityPolicies().directive_details
+    directive = SecuritPolicies().directive_details
     host_list = list(directive.keys())
     for host in host_list:
         logging.info(

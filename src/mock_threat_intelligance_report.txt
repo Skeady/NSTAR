@@ -1,0 +1,2 @@
+The destination IP address 172.16.3.1 should be blocked on protocol tcp port 80 and port 433 as they are listed as malicious.
+The destination IP address 10.1.1.1 should be allowed on protocol tcp port 80 and port 433 as they are not listed as malicious.
