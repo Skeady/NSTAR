@@ -1,0 +1,111 @@
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+!         
+!
+no ip domain lookup
+ip domain name nstar.ie
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username nstar privilege 15 secret 5 $1$ozSh$ZzBwKAJj.HRFxhOSw2YHT.
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback1
+ description Lo1 add-4.4.4.4
+ ip address 4.4.4.4 255.255.255.0
+!
+interface Ethernet0/0
+ no ip address
+ shutdown
+ duplex auto
+!
+interface GigabitEthernet0/0
+ description R4 G0/0 <> F1/0 SW2
+ ip address 192.168.1.1 255.255.255.0
+ media-type gbic
+ speed 1000
+ duplex full
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ description R4 G1/0 <> G1/0 R1
+ ip address 209.165.200.226 255.255.255.248
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ description R4 G2/0 <> F1/0 SW1
+ ip address 192.168.2.1 255.255.255.0
+ negotiation auto
+!
+router ospf 1
+ network 4.4.4.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 209.165.200.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+snmp-server community NSTAR RO
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ exec-timeout 60 0
+ privilege level 15
+ login local
+ transport input ssh
+!
+!
+end
