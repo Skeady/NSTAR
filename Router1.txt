@@ -1,0 +1,124 @@
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default local-case enable
+!
+!
+!
+!
+!         
+aaa session-id common
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name nstar.ie
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username nstar privilege 15 secret 5 $1$Z5n0$iP7BU3F2jJKu5kIP3kiE0/
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback1
+ description Lo1 add-1.1.1.1
+ ip address 1.1.1.1 255.255.255.0
+!
+interface Ethernet0/0
+ no ip address
+ shutdown 
+ duplex auto
+!
+interface GigabitEthernet0/0
+ description R1 G0/0 <-> G0/0 R2
+ ip address 10.1.1.1 255.255.255.0
+ media-type gbic
+ speed 1000
+ duplex full
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ description R1 G1/0 <-> G1/0 ASA
+ ip address 209.165.200.225 255.255.255.248
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ description R1 G2/0 <-> Eth0 Server
+ no ip address
+ shutdown
+ negotiation auto
+!
+router ospf 1
+ network 1.1.1.0 0.0.0.255 area 0
+ network 10.1.1.0 0.0.0.255 area 0
+ network 192.168.178.0 0.0.0.255 area 0
+ network 209.165.200.0 0.0.0.255 area 0
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+snmp-server group RO-NSAR v3 priv read INT-ACCESS 
+snmp-server view ALL-ACCESS iso included
+snmp-server view INT-ACCESS ifEntry included
+snmp-server community NSTAR RO
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ exec-timeout 60 0
+ privilege level 15
+ transport input ssh
+!
+!
+end
